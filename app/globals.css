@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark-first developer-tool palette (GitHub / Vercel / Linear vibe). */
+:root {
+  --background: 222 18% 7%;
+  --foreground: 210 20% 92%;
+  --card: 222 16% 10%;
+  --card-foreground: 210 20% 92%;
+  --muted: 222 14% 16%;
+  --muted-foreground: 215 14% 60%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 11%;
+  --accent: 222 14% 18%;
+  --accent-foreground: 210 20% 92%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 222 13% 20%;
+  --input: 222 13% 20%;
+  --ring: 217 91% 60%;
+  --radius: 0.6rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin, dev-tool style scrollbars. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 9999px;
+  border: 2px solid hsl(var(--background));
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
