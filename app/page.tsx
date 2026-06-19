@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Stethoscope } from "lucide-react";
+import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { LogInput } from "@/components/LogInput";
@@ -67,9 +67,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="mb-6 flex flex-col gap-1">
         <div className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card">
-            <Stethoscope className="h-5 w-5 text-primary" />
-          </span>
+          <Image src="/LogDoctor/logo.png" alt="" width={36} height={36} className="object-contain" priority unoptimized />
           <h1 className="text-xl font-bold tracking-tight">LogDoctor</h1>
         </div>
         <p className="text-sm text-muted-foreground">
