@@ -1,0 +1,42 @@
+name: Build & Deploy to coms
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-coms
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    # Self-hosted runner installed on the coms server itself. The server only
+    # exposes 443 publicly (SSH 22 is private / Tailscale-only), so a cloud
+    # runner cannot reach it — the runner lives on the box and deploys locally.
+    runs-on: [self-hosted, linux]
+    env:
+      DEPLOY_PATH: /var/www/coms/LogDoctor
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Deploy (local copy into nginx web root)
+        run: |
+          rsync -az --delete out/ "$DEPLOY_PATH/"
+          echo "Deployed $(date -u) to $DEPLOY_PATH"
+
+      - name: Done
+        run: echo "Live at https://coms.kw.ac.kr/LogDoctor/"
